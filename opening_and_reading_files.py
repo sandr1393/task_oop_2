@@ -1,4 +1,4 @@
-
+import os
 # name_file, __ = os.path.splitext(filename)
 # cook_book = {
 #   'Омлет': [
@@ -49,7 +49,7 @@ with open('recipes.txt', 'r', encoding='utf-8') as file:
             i = 2 
             lst_book.clear() 
             data1.clear()
-            
+print(f'Задание №1\n {cook_book}')           
 
 def get_shop_list_by_dishes(dishes, person_count):
     i = 0
@@ -63,30 +63,54 @@ def get_shop_list_by_dishes(dishes, person_count):
     return dict_ingredients
 
 dish = ['Запеченный картофель','Омлет']
-print(get_shop_list_by_dishes(dish,2))
-
+print(f'Задание №2\n {get_shop_list_by_dishes(dish,2)}') 
 
 with open('1.txt', 'r', encoding='utf-8') as file:
+    path = os.path.join(os.getcwd(), '1.txt')
+    tail = os.path.split(path)
+    # print("Путь файла " + path)
+    # print("Имя файла " + tail[1])
     row_counter = 0
     data = file.readlines()
+    
     for line in data:
         row_counter += 1
+    data.insert(0,tail[1] + '\n')
+    data.append('\n')     
     dict_data_txt[row_counter] = data
 
 with open('2.txt', 'r', encoding='utf-8') as file:
+    path = os.path.join(os.getcwd(), '2.txt')
+    tail = os.path.split(path)
     row_counter = 0
     data = file.readlines()
     for line in data:
         row_counter += 1
+    data.insert(0,tail[1]+ '\n')
+    data.append('\n')    
     dict_data_txt[row_counter] = data
 
 with open('3.txt', 'r', encoding='utf-8') as file:
+    path = os.path.join(os.getcwd(), '3.txt')
+    tail = os.path.split(path)
     row_counter = 0
     data = file.readlines()
     for line in data:
         row_counter += 1
+    data.insert(0,tail[1]+ '\n') 
+    data.append('\n')       
     dict_data_txt[row_counter] = data
 
 sorted_dict_data = dict(sorted(dict_data_txt.items()))
+finish_text = str(sorted_dict_data)
 
-print(sorted_dict_data)
+def dict_to_string(data_dict):
+    result = ""
+    for key, value in data_dict.items():
+        result += f"{''.join(value[0])}{key}\n{''.join(value[1:])}"
+    return result
+
+with open('finish.txt', 'w', encoding='utf-8') as file:
+    file.write(dict_to_string(sorted_dict_data))
+
+print(f'Задание №3\n{dict_to_string(sorted_dict_data)}')   
